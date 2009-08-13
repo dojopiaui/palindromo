@@ -1,16 +1,15 @@
 class String
-  def palindrome?
-    out = self.replace_s.downcase == self.replace_s.downcase.reverse
+  def palindrome?(case_sensitive = false)
+    pal = case_sensitive ? self.only_letters : self.only_letters.downcase
+    pal == pal.reverse
   end
-  
-  def palindrome_case?
-    self.replace_s == self.replace_s.reverse
-  end
-  
-  protected
-    def replace_s
-      retorno = self.gsub(/[ ,.?!\-]/,"")
-      retorno = retorno.gsub(/[áãàâ]/u,"a").gsub(/[éẽêè]/u,"e").gsub(/[íïìî]/u,"i").gsub(/[òóõôö]/u,"o").gsub(/[ùúü]/u,"u").gsub(/[ç]/u,"c").
-                        gsub(/[ÁÃÀÂ]/u,"A").gsub(/[ÉẼÊÈ]/u,"E").gsub(/[ÍÏÌÎ]/u,"I").gsub(/[ÒÓÕÔÖ]/u,"O").gsub(/[ÙÚÜ]/u,"U").gsub(/[Ç]/u,"C")
+
+  protected  
+    def only_letters
+      retorno = self
+      chars       = "áâàäãéêèëíîìïóôòöõúûùüñçÁÂÀÄÃÉÊÈËÍÎÌÏÓÔÒÖÕÚÛÙÜÑÇ"
+      chars_clean = "aaaaaeeeeiiiiooooouuuuncAAAAAEEEEIIIIOOOOOUUUUNC"
+      retorno.gsub!(/[#{chars}]/) { |ch| chars_clean.scan(/./)[chars.scan(/./mu).index(ch)] }
+      retorno.gsub(/[^a-zA-Z0-9]/, "")
     end
 end

@@ -1,6 +1,6 @@
 class String
   def palindrome?
-    self.downcase.replace_s == self.downcase.replace_s.reverse
+    out = self.replace_s.downcase == self.replace_s.downcase.reverse
   end
   
   def palindrome_case?
@@ -10,7 +10,7 @@ class String
   protected
     def replace_s
       retorno = self.gsub(/[ ,.?!\-]/,"")
-      retorno = retorno.gsub(/[áãàâ]/,"a").gsub(/[éẽêè]/,"e").gsub(/[íïìî]/,"i").gsub(/[òóõôö]/,"o").gsub(/[ùúü]/,"u").gsub(/[ç]/,"c")
-      retorno.gsub(/[ÁÃÀÂ]/,"A").gsub(/[ÉẼÊÈ]/,"E").gsub(/[ÍÏÌÎ]/,"I").gsub(/[ÒÓÕÔÖ]/,"O").gsub(/[ÙÚÜ]/,"U").gsub(/[Ç]/,"C")
+      retorno = retorno.gsub(/[áãàâ]/u,"a").gsub(/[éẽêè]/u,"e").gsub(/[íïìî]/u,"i").gsub(/[òóõôö]/u,"o").gsub(/[ùúü]/u,"u").gsub(/[ç]/u,"c").
+                        gsub(/[ÁÃÀÂ]/u,"A").gsub(/[ÉẼÊÈ]/u,"E").gsub(/[ÍÏÌÎ]/u,"I").gsub(/[ÒÓÕÔÖ]/u,"O").gsub(/[ÙÚÜ]/u,"U").gsub(/[Ç]/u,"C")
     end
 end
